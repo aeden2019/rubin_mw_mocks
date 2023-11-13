@@ -1,0 +1,14 @@
+---
+snap : 385
+sim : 'm12b'
+sim_dir : '/home/jovyan/data/fire2/m12b_res7100/'
+rmin : 50
+rmax : 300
+bmin : -1
+bmax : 1
+overdensity : True
+sat_mask : True
+halo_mask : True
+rand_mask : True
+subsample : 10000
+...
