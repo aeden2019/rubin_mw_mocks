@@ -1,0 +1,4 @@
+\n# Ignore Python bytecode
+__pycache__/
+\n# Ignore .ebf files
+*.ebf

@@ -12,6 +12,7 @@ from astropy import units as u
 import sys
 sys.path.append('../mock')
 import allvariables
+import os
 
 if __name__ == "__main__":
   
@@ -22,11 +23,14 @@ if __name__ == "__main__":
     bmax = params[6]
     overdensity = params[7]
     
-    # Open the mock file
-    mock_file_path = "/home/jovyan/home/rubin_mw_mocks/src/mock/ananke_mock.hdf5" # UPDATE THIS TO BE INDEPENDENT
-    print(f"Opening data from: {mock_file_path}")
-    df = vaex.open(mock_file_path)
+    # Get the directory of the current script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
 
+    # Construct the full path to the data file
+    ananke_file_path = os.path.join(script_dir, "..", "mock", "survey.sim.h5")
+    print(f"\nOpening data from: {ananke_file_path}")
+    df = vaex.open(ananke_file_path)
+    
     # Combine the position and velocities
     print("Combining position and velocity")
     pos_out = np.column_stack((df['px'].values, df['py'].values, df['pz'].values))
@@ -41,6 +45,7 @@ if __name__ == "__main__":
     
     # Create mollwiede plot
     print("Creating mollweide plot")
-    figname = "mock_mollweide_plot.png"
+    figname = "ananke_mollweide_plot.png"
     pl.mollweide_projection(pos_galactic_ananke[0]*180/np.pi, pos_galactic_ananke[1]*180/np.pi, 0, 0, 
                             sim_dir=sim_dir, bmin=bmin, bmax=bmax, nside=40, smooth=5, overdensity=overdensity, figname=figname)
+    

@@ -109,20 +109,11 @@ if __name__ == "__main__":
     assert len(p['pos3']) == len(p['vel3']), "Pos has different length than vel when creating p dictionary"
     assert len(p['pos3']) == len(p['mass']), "Pos has different length than mass when creating p dictionary"
     
-    # Run the ananke process with kword args
+    # Initialize the ananke process with kword args
     name='sim'
     ananke = an.Ananke(p, name, photo_sys='padova/LSST', cmd_magnames='rmag,gmag-rmag'
                                                 , app_mag_lim_lo=17, app_mag_lim_hi=27.5, abs_mag_lim_lo=-7.0, abs_mag_lim_hi=10.0
                                                 , color_lim_lo=-1000, color_lim_hi=1000, r_max=1000)
+    # Run ananke
     ananke.run()
-    
-    # Make a survey using LSST (outputted as vaex data structure)
-    survey = ananke._output
-    df = survey._vaex
-    
-    # TESTING - Print ananke output path
-    #print(f"The ananke data is outputed to: {ananke._path}")
-    
-    # Save the data structure
-    df.export("ananke_mock.hdf5")
    
