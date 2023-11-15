@@ -3,29 +3,20 @@ Create ANANKE mock catalog from FIRE data
 
 """
 
-# import gizmo_analysis as ga
-# import sys
-# import graphing 
-# import ananke as an
-# import numpy as np
-# from astropy import units as u
-# import nba
-# import plotting as pl
-
 import numpy as np
 import args
 import gizmo_analysis as ga
 import allvariables
 from argparse import ArgumentParser
 from astropy import units as u
-import nba
+#import nba
 import ananke as an
 
 # CREATE INDEPENDENT FILES FOR THESE TOOLS
 # import sys
 # sys.path.append('/home/jovyan/home/python_tools')
 
-import mollweide_plotting as pl
+#import mollweide_plotting as pl
 
 
 
@@ -145,24 +136,6 @@ if __name__ == "__main__":
     survey = ananke._output
     df = survey._vaex
     
-    # Combine the position and velocities
-    pos_out = np.column_stack((df['px'].values, df['py'].values, df['pz'].values))
-    vel_out = np.column_stack((df['vx'].values, df['vy'].values, df['vz'].values))
-    
-    # Apply kinematics 
-    f = 1* (u.km/u.s).to(u.kpc/u.Gyr)
-    kinematics1_ananke = nba.kinematics.Kinematics(pos_out, vel_out)
-    pos_galactic_ananke = kinematics1_ananke.pos_cartesian_to_galactic()
-    vel_galactic_ananke = kinematics1_ananke.vel_cartesian_to_galactic()
-    
-    # Create mollwiede plot
-    # UPDATE pl TO BE A SEPERATE FILE
-#     pl.mollweide_projection(pos_galactic_ananke[0]*180/np.pi, pos_galactic_ananke[1]*180/np.pi, 0, 0, 
-#                             title="", bmin=bmin, bmax=bmax, nside=40, smooth=5, overdensity=overdensity, figname=figname)
-    figname = "mock_mollweide_plot.png"
-    pl.mollweide_projection(pos_galactic_ananke[0]*180/np.pi, pos_galactic_ananke[1]*180/np.pi, 0, 0, 
-                            sim_dir=sim_dir, bmin=bmin, bmax=bmax, nside=40, smooth=5, overdensity=overdensity, figname=figname)
-    
-    
-    
-    
+    # Save the data structure
+    df.export("ananke_mock.hdf5")
+   
