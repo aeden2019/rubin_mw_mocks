@@ -7,31 +7,15 @@ import numpy as np
 import args
 import gizmo_analysis as ga
 import allvariables
-from argparse import ArgumentParser
 from astropy import units as u
-#import nba
 import ananke as an
-
-# CREATE INDEPENDENT FILES FOR THESE TOOLS
-# import sys
-# sys.path.append('/home/jovyan/home/python_tools')
-
-#import mollweide_plotting as pl
 
 
 
 if __name__ == "__main__":
-    
-    # Parse the parameter file
-    parser = ArgumentParser(description="Parameters file for make_mock.py")
-    parser.add_argument(
-            "--param", dest="paramFile", default="config.yaml",
-            type=str, help="provide parameter file")
-    args = parser.parse_args()
-    
-    # Pass the parameter file to allvariables.readparams
-    paramfile = args.paramFile
-    params = allvariables.readparams(paramfile)
+ 
+    # Get the parameters from the config file
+    params = allvariables.getparams()
     
     # Declare all the parameters locally
     snap = params[0]
@@ -135,6 +119,9 @@ if __name__ == "__main__":
     # Make a survey using LSST (outputted as vaex data structure)
     survey = ananke._output
     df = survey._vaex
+    
+    # TESTING - Print ananke output path
+    #print(f"The ananke data is outputed to: {ananke._path}")
     
     # Save the data structure
     df.export("ananke_mock.hdf5")

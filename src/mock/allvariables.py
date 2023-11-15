@@ -5,11 +5,40 @@ Read variables from yaml parameter file
 
 
 import yaml
+from argparse import ArgumentParser
+import os
+
+
+
+def getparams():
+    # Parse the parameter file
+    parser = ArgumentParser(description="Parameters file for make_mock.py")
+    parser.add_argument(
+            "--param", dest="paramFile", default="config.yaml",
+            type=str, help="provide parameter file")
+    args = parser.parse_args()
+    
+    # Pass the parameter file to readparams
+    paramfile = args.paramFile
+    params = readparams(paramfile)
+    
+    return params
+
+
 
 def readparams(paramfile):
-    with open(paramfile) as f:
+    
+    # Get the directory of the current script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Construct the full path to the parameter file
+    paramfile_path = os.path.join(script_dir, paramfile)
+    
+    # Open the param file path
+    with open(paramfile_path) as f:
         d = yaml.safe_load(f)
     
+    # Store each yaml entry
     snap = d["snap"]
     sim = d["sim"]
     sim_dir = d["sim_dir"]
@@ -23,6 +52,7 @@ def readparams(paramfile):
     rand_mask = d["rand_mask"]
     subsample = d["subsample"]
     
+    # Check for correct type
     assert type(snap)==int, "snap must be an integer"
     assert type(sim)==str, "sim must be a string"
     assert type(sim_dir)==str, "sim_dir must be a string"
