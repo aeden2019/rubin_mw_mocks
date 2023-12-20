@@ -117,7 +117,7 @@ Below is a table of the parameters used with `py-ananke` to best simulate the ch
 
 ### Output Parameters <a name="ananke-parameters-output"></a> 
 
-Below is a table of the parameters outputed by `py-ananke`. This is a work in progress, as indicated by the parameters with `Unkown` units. 
+Below is a table of the parameters outputed by `py-ananke`. This is a work in progress, as indicated by the parameters with `Unknown` units. 
 
 | Ouput Parameter | Description                   | Unit          |
 | --------------- | ----------------------------- | ------------- |
