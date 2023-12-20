@@ -120,34 +120,34 @@ Below is a table of the parameters used with `py-ananke` to best simulate the ch
 Below is a table of the parameters outputed by `py-ananke`. This is a work in progress, as indicated by the parameters with `Unkown` units. 
 
 | Ouput Parameter | Description                   | Unit          |
-| age             | Age                           | log (age/yr)  | 
-| alpha           | Alpha abundance               | [alpha/Fe]    | 
-| dec             | Declination                   | degree        | 
-| dmod            | Distance modulus              | Unknown       | 
-| feh             | Metallicity                   | [Fe/H]        | 
-| glat            | Galactic latitude             | degree        | 
+| age             | Age                           | log (age/yr)  |
+| alpha           | Alpha abundance               | [alpha/Fe]    |
+| dec             | Declination                   | degree        |
+| dmod            | Distance modulus              | Unknown       |
+| feh             | Metallicity                   | [Fe/H]        |
+| glat            | Galactic latitude             | degree        |
 | glon            | Galactic longitude            | degree        |
-| grav            | Surface gravity               | log(gravity)  | 
+| grav            | Surface gravity               | log(gravity)  |
 | lsst_gmag       | Magnitude in g band           | mag           |
 | lsst_imag       | Magnitude in i band           | mag           |
 | lsst_rmag       | Magnitude in r band           | mag           |
 | lsst_umag       | Magnitude in u band           | mag           |
 | lsst_ymag       | Magnitude in y band           | mag           |
 | lsst_zmag       | Magnitude in z band           | mag           |
-| lum             | Luminosity                    | Unknown       | 
+| lum             | Luminosity                    | Unknown       |
 | mact            | Actual solar mass             | M_solar       |
 | mtip            | Mass at giant branch tip      | M_solar       |
 | parentid        | Parent particle #             | NA            |
 | partid          | 0 if at parent coords, else 1 | NA            |
-| px              | Position x                    | kpc           | 
+| px              | Position x                    | kpc           |
 | py              | Position y                    | kpc           |
 | pz              | Position z                    | kpc           |
 | ra              | Right Ascension               | degree        |
 | rad             | Radial distance               | kpc           |
 | smass           | Initial stellar mass          | M_solar       |
-| teff            | Effective Temperature         | log(T/Kelvin) | 
+| teff            | Effective Temperature         | log(T/Kelvin) |
 | vx              | Velocity x                    | Unknown       |
-| vy              | Velocity y                    | Unknown       | 
+| vy              | Velocity y                    | Unknown       |
 | vz              | Velocity z                    | Unknown       |
 
 ---
