@@ -100,6 +100,9 @@ Below is a table of the parametesr used with `py-ananke` to best simulate the ch
 | ----------- | ----------- | -------------- |
 | particles   | p           | Dictionary of particle data from FIRE. |
 | photo_sys   | 'padova/LSST' | Photometric system Galaxia should use to generate the survey. |
+| cmd_magnames| ‘rmag,gmag-rmag’ | Names of the filters Galaxia should use for the color-magnitude diagram box selection. First argument is used for appMagLimits and the second for colorLimits. |
+
+
 
 
 ---
