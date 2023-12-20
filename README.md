@@ -6,6 +6,14 @@ E-Mail: aeden2019@my.fit.edu
 
 ---
 
+# Contents
+
+* [Summary](#markdown-header-summary)
+* [Requirements](#markdown-header-requirements)
+* [Ananke Parameters](#markdown-header-ananke-parameters)
+
+---
+
 ## Summary
 
 This code utilizes the [py-ananke](https://arxiv.org/abs/2312.02268) library to generate synthetic star catalogs from FIRE simulated data. In particular, it applies the constraints of the Vera Rubin telescope to generate a mock catalog, and then provides visualization via mollweide plots. 
@@ -86,6 +94,12 @@ pip install .
 
 ## Ananke Parameters
 
-Work in progress
+Below is a table of the parametesr used with `py-ananke` to best simulate the characteristics of the Vera Rubin telescope. 
+
+| Parameter   | Value Used  | Description    |
+| ----------- | ----------- | -------------- |
+| particles   | p           | Dictionary of particle data from FIRE. |
+| photo_sys   | 'padova/LSST' | Photometric system Galaxia should use to generate the survey. |
+
 
 ---
