@@ -1,14 +1,21 @@
 ---
-snap : 385
+# FIRE snapshot number, simulation id, and simulation directory location (user specific)
+snap : 385 
 sim : 'm12b'
 sim_dir : '/home/jovyan/data/fire2/m12b_res7100/'
-rmin : 50
+# Min and max radius [kpc]
+rmin : 20
 rmax : 300
+# Min and max value for healpy.newvisufunc.projview used in mollweide_plotting.py
 bmin : -1
 bmax : 1
+# If True, creates mollweide plot of overdensity 
 overdensity : True
+# If True, removes the satellite mask using mask path
 sat_mask : True
+# If True, removes the halo using rmin and rmax
 halo_mask : True
+# If True, randomly subsamples a number of particules equal to the subsample value
 rand_mask : True
 subsample : 10000
 ...
