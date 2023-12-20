@@ -120,6 +120,7 @@ Below is a table of the parameters used with `py-ananke` to best simulate the ch
 Below is a table of the parameters outputed by `py-ananke`. This is a work in progress, as indicated by the parameters with `Unkown` units. 
 
 | Ouput Parameter | Description                   | Unit          |
+| --------------- | ----------------------------- | ------------- |
 | age             | Age                           | log (age/yr)  |
 | alpha           | Alpha abundance               | [alpha/Fe]    |
 | dec             | Declination                   | degree        |
