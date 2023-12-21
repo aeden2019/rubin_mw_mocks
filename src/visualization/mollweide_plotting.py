@@ -10,8 +10,6 @@ import pynbody
 import sys
 from pynbody import filt
 from astropy import units as u
-# from astropy.coordinates import Latitude
-# from astropy.coordinates import Longitude
 import nba
 import healpy as hp
 from healpy.newvisufunc import projview, newprojplot
