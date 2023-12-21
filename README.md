@@ -99,7 +99,7 @@ pip install .
 
 ## Ananke Parameters <a name="ananke-parameters"></a> 
 
-In this section you can find details regarding the input and ouput parameters for `py-ananke`. 
+In this section you can find details regarding the input and ouput parameters for `py-ananke`. For additional information, refer to the `testing_ananke.ipynb` notebook located at [https://github.com/athob/py-ananke/blob/main/jupyter/testing_ananke.ipynb](https://github.com/athob/py-ananke/blob/main/jupyter/testing_ananke.ipynb). 
 
 ### Input Parameters <a name="ananke-parameters-input"></a> 
 
@@ -117,14 +117,14 @@ Below is a table of the parameters used with `py-ananke` to best simulate the ch
 
 ### Output Parameters <a name="ananke-parameters-output"></a> 
 
-Below is a table of the parameters outputed by `py-ananke`. This is a work in progress, as indicated by the parameters with `Unknown` units. 
+Below is a table of the parameters outputed by `py-ananke`. 
 
 | Ouput Parameter | Description                   | Unit          |
 | --------------- | ----------------------------- | ------------- |
 | age             | Age                           | log (age/yr)  |
 | alpha           | Alpha abundance               | [alpha/Fe]    |
 | dec             | Declination                   | degree        |
-| dmod            | Distance modulus              | Unknown       |
+| dmod            | Distance modulus              | NA            |
 | feh             | Metallicity                   | [Fe/H]        |
 | glat            | Galactic latitude             | degree        |
 | glon            | Galactic longitude            | degree        |
@@ -135,7 +135,7 @@ Below is a table of the parameters outputed by `py-ananke`. This is a work in pr
 | lsst_umag       | Magnitude in u band           | mag           |
 | lsst_ymag       | Magnitude in y band           | mag           |
 | lsst_zmag       | Magnitude in z band           | mag           |
-| lum             | Luminosity                    | Unknown       |
+| lum             | Luminosity                    | L_solar       |
 | mact            | Actual solar mass             | M_solar       |
 | mtip            | Mass at giant branch tip      | M_solar       |
 | parentid        | Parent particle #             | NA            |
@@ -147,8 +147,8 @@ Below is a table of the parameters outputed by `py-ananke`. This is a work in pr
 | rad             | Radial distance               | kpc           |
 | smass           | Initial stellar mass          | M_solar       |
 | teff            | Effective Temperature         | log(T/Kelvin) |
-| vx              | Velocity x                    | Unknown       |
-| vy              | Velocity y                    | Unknown       |
-| vz              | Velocity z                    | Unknown       |
+| vx              | Velocity x                    | km/s          |
+| vy              | Velocity y                    | km/s          |
+| vz              | Velocity z                    | km/s          |
 
 ---
