@@ -23,9 +23,6 @@ if __name__ == "__main__":
     sim_dir = params[2]
     rmin = params[3]
     rmax = params[4]
-    bmin = params[5]
-    bmax = params[6]
-    overdensity = params[7]
     sat_mask = params[8]
     halo_mask = params[9]
     rand_mask = params[10]
@@ -111,9 +108,11 @@ if __name__ == "__main__":
     
     # Initialize the ananke process with kword args
     name='sim'
-    ananke = an.Ananke(p, name, photo_sys='padova/LSST', cmd_magnames='rmag,gmag-rmag'
-                                                , app_mag_lim_lo=17, app_mag_lim_hi=27.5, abs_mag_lim_lo=-7.0, abs_mag_lim_hi=10.0
-                                                , color_lim_lo=-1000, color_lim_hi=1000, r_max=1000)
+#     ananke = an.Ananke(p, name, photo_sys='padova/LSST', cmd_magnames='rmag,gmag-rmag', app_mag_lim_lo=17, app_mag_lim_hi=27.5,
+#                        abs_mag_lim_lo=-7.0, abs_mag_lim_hi=10.0, color_lim_lo=-1000, color_lim_hi=1000, r_max=1000)
+    ananke = an.Ananke(p, name, photo_sys='padova/LSST', cmd_magnames='rmag,gmag-rmag', app_mag_lim_lo=17, app_mag_lim_hi=27.5,
+                       abs_mag_lim_lo=-7.0, abs_mag_lim_hi=10.0, r_max=1000)
+    
     # Run ananke
     ananke.run()
    
