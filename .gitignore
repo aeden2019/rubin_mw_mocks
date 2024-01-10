@@ -2,3 +2,5 @@
 __pycache__/
 \n# Ignore .ebf files
 *.ebf
+\n# Ignore notebook checkpoints
+.ipynb_checkpoints/
