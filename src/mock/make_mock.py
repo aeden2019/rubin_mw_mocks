@@ -110,6 +110,8 @@ if __name__ == "__main__":
     name='sim'
 #     ananke = an.Ananke(p, name, photo_sys='padova/LSST', cmd_magnames='rmag,gmag-rmag', app_mag_lim_lo=17, app_mag_lim_hi=27.5,
 #                        abs_mag_lim_lo=-7.0, abs_mag_lim_hi=10.0, color_lim_lo=-1000, color_lim_hi=1000, r_max=1000)
+
+    # Check app and abs lo and hi. 
     ananke = an.Ananke(p, name, photo_sys='padova/LSST', cmd_magnames='rmag,gmag-rmag', app_mag_lim_lo=17, app_mag_lim_hi=27.5,
                        abs_mag_lim_lo=-7.0, abs_mag_lim_hi=10.0, r_max=1000)
     
