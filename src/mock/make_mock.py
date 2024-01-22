@@ -9,6 +9,7 @@ import gizmo_analysis as ga
 import allvariables
 from astropy import units as u
 import ananke as an
+import inputparams
 
 
 
@@ -42,6 +43,7 @@ if __name__ == "__main__":
     
     # Remove satellite
     if sat_mask:
+        print("* Removing satellite with mask \n")
         # Store satellite indices (from Mia)
         path = '/home/jovyan/home/tracked/{}/all_LMC_inds.txt'.format(sim)
         all_unique_lmc_inds = np.loadtxt(path)
@@ -63,6 +65,7 @@ if __name__ == "__main__":
         
     # Removing outer halo
     if halo_mask:
+        print("* Removing halo with mask \n")
         # Create outer halo distance mask
         dist = np.sqrt(np.sum(pos**2, axis=1))
         dist_cut1 = np.where((dist > rmin) & (dist< rmax)) 
@@ -77,11 +80,12 @@ if __name__ == "__main__":
    
     # Apply random subsampling
     if rand_mask:
+        print(f"* Applying subsample of {subsample} particles to the dataset of {len(pos)} particles \n")
+        # Create random cut
         rand_cut1 = np.random.randint(0, len(pos), subsample)
         pos = pos[rand_cut1]
         vel = vel[rand_cut1]
      
-    
     #Create p dictionary to store particle data
     p = {}
     p['pos3'] = pos       # position in kpc
@@ -106,14 +110,19 @@ if __name__ == "__main__":
     assert len(p['pos3']) == len(p['vel3']), "Pos has different length than vel when creating p dictionary"
     assert len(p['pos3']) == len(p['mass']), "Pos has different length than mass when creating p dictionary"
     
+    # Plotting for testing
+    print("Plotting stellar ages and metalicity of ananke input")
+    inputparams.plot_stellar_ages(p['age'])
+    inputparams.plot_metalicity(p['feh'])
+    
     # Initialize the ananke process with kword args
     name='sim'
-#     ananke = an.Ananke(p, name, photo_sys='padova/LSST', cmd_magnames='rmag,gmag-rmag', app_mag_lim_lo=17, app_mag_lim_hi=27.5,
-#                        abs_mag_lim_lo=-7.0, abs_mag_lim_hi=10.0, color_lim_lo=-1000, color_lim_hi=1000, r_max=1000)
-
-    # Check app and abs lo and hi. 
     ananke = an.Ananke(p, name, photo_sys='padova/LSST', cmd_magnames='rmag,gmag-rmag', app_mag_lim_lo=17, app_mag_lim_hi=27.5,
                        abs_mag_lim_lo=-7.0, abs_mag_lim_hi=10.0, r_max=1000)
+
+# TESTING - Different photometric system
+#     ananke = an.Ananke(p, name, photo_sys='padova/GAIA', cmd_magnames='Gmag,Gmag-G_RPmag', app_mag_lim_lo=17,
+#                        app_mag_lim_hi=27.5, abs_mag_lim_lo=-1000, abs_mag_lim_hi=1000, r_max=1000)
     
     # Run ananke
     ananke.run()
