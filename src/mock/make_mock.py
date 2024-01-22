@@ -9,7 +9,7 @@ import gizmo_analysis as ga
 import allvariables
 from astropy import units as u
 import ananke as an
-import inputparams
+import plot_ananke_inputs
 
 
 
@@ -112,8 +112,8 @@ if __name__ == "__main__":
     
     # Plotting for testing
     print("Plotting stellar ages and metalicity of ananke input")
-    inputparams.plot_stellar_ages(p['age'])
-    inputparams.plot_metalicity(p['feh'])
+    plot_ananke_inputs.plot_stellar_ages(p['age'])
+    plot_ananke_inputs.plot_metalicity(p['feh'])
     
     # Initialize the ananke process with kword args
     name='sim'
