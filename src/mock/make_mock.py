@@ -42,7 +42,7 @@ if __name__ == "__main__":
     abs_mag_lim_hi = params[20]
     ananke_r_max = params[21]
     
-    # Print parameters
+    # Print parameters (for debugging)
     print(f"Parameters:")
     print(f"  snap: {snap}")
     print(f"  sim: {sim}")

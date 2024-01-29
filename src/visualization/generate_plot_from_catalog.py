@@ -22,12 +22,13 @@ if __name__ == "__main__":
     bmin = params[6]
     bmax = params[7]
     overdensity = params[8]
+    ananke_name = params[14]
     
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Construct the full path to the data file
-    ananke_file_path = os.path.join(script_dir, "..", "mock", "survey.sim.h5")
+    ananke_file_path = os.path.join(script_dir, "..", "mock", f"survey.{ananke_name}.h5")
     print(f"\nOpening data from: {ananke_file_path}")
     df = vaex.open(ananke_file_path)
     
@@ -45,7 +46,7 @@ if __name__ == "__main__":
     
     # Create mollwiede plot
     print("Creating mollweide plot")
-    figname = "ananke_mollweide_plot.png"
+    figname = f"{ananke_name}_mollweide_plot.png"
     pl.mollweide_projection(pos_galactic_ananke[0]*180/np.pi, pos_galactic_ananke[1]*180/np.pi, 0, 0, 
                             sim_dir=sim_dir, bmin=bmin, bmax=bmax, nside=40, smooth=5, overdensity=overdensity, figname=figname)
     
