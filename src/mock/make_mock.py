@@ -22,13 +22,35 @@ if __name__ == "__main__":
     snap = params[0]
     sim = params[1]
     sim_dir = params[2]
-    rmin = params[3]
-    rmax = params[4]
-    sat_mask = params[8]
-    halo_mask = params[9]
-    rand_mask = params[10]
-    subsample = params[11]
+    sat_id_dir = params[3]
+    rmin = params[4]
+    rmax = params[5]
+    bmin = params[6]
+    bmax = params[7]
+    overdensity = params[8]
+    sat_mask = params[9]
+    only_sat_mask = params[10]
+    halo_mask = params[11]
+    rand_mask = params[12]
+    subsample = params[13]
     
+    # Print parameters
+    print(f"Parameters:")
+    print(f"  snap: {snap}")
+    print(f"  sim: {sim}")
+    print(f"  sim_dir: {sim_dir}")
+    print(f"  sat_id_dir: {sat_id_dir}")
+    print(f"  rmin: {rmin}")
+    print(f"  rmax: {rmax}")
+    print(f"  bmin: {bmin}")
+    print(f"  bmax: {bmax}")
+    print(f"  overdensity: {overdensity}")
+    print(f"  sat_mask: {sat_mask}")
+    print(f"  only_sat_mask: {only_sat_mask}")
+    print(f"  halo_mask: {halo_mask}")
+    print(f"  rand_mask: {rand_mask}")
+    print(f"  subsample: {subsample}")
+     
     
     # Create FIRE part
     part = ga.io.Read.read_snapshots(['star'], 'index', snap, sim_dir, assign_hosts=True)
@@ -41,19 +63,30 @@ if __name__ == "__main__":
     # Blank satellite mask
     satellite_mask = np.ones(len(pos), dtype=bool)
     
+    # Store satellite indices (from Mia)
+    all_unique_lmc_inds = np.loadtxt(sat_id_dir)
+    all_inds = part['star'].prop('id')
+    remaining_indices = np.setdiff1d(all_inds, np.array(all_unique_lmc_inds))
+    id_indices = np.where(np.isin(all_inds, remaining_indices))[0]
+    only_lmc_indices = np.where(~np.isin(all_inds, remaining_indices))[0]
+    
     # Remove satellite
     if sat_mask:
         print("* Removing satellite with mask \n")
-        # Store satellite indices (from Mia)
-        path = '/home/jovyan/home/tracked/{}/all_LMC_inds.txt'.format(sim)
-        all_unique_lmc_inds = np.loadtxt(path)
-        all_inds = part['star'].prop('id')
-        remaining_indices = np.setdiff1d(all_inds, np.array(all_unique_lmc_inds))
-        id_indices = np.where(np.isin(all_inds, remaining_indices))[0]
-        only_lmc_indices = np.where(~np.isin(all_inds, remaining_indices))[0]
         
         # Update satellite mask 
         satellite_mask[only_lmc_indices] = 0
+
+        # Apply satellite mask
+        pos = pos[satellite_mask]     
+        vel = vel[satellite_mask]
+        
+    # Include only the satellite mask
+    if only_sat_mask:
+        print("* Removing non-satellite objects with mask \n")
+        
+        # Update satellite mask 
+        satellite_mask[id_indices] = 0
 
         # Apply satellite mask
         pos = pos[satellite_mask]     
@@ -116,7 +149,8 @@ if __name__ == "__main__":
     plot_ananke_inputs.plot_metalicity(p['feh'])
     
     # Initialize the ananke process with kword args
-    name='sim'
+    #name='sim'
+    name='sat_sim'
     ananke = an.Ananke(p, name, photo_sys='padova/LSST', cmd_magnames='rmag,gmag-rmag', app_mag_lim_lo=17, app_mag_lim_hi=27.5,
                        abs_mag_lim_lo=-7.0, abs_mag_lim_hi=10.0, r_max=1000)
 

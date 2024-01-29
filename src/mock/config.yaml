@@ -1,8 +1,10 @@
 ---
-# FIRE snapshot number, simulation id, and simulation directory location (user specific)
+# FIRE snapshot number and simulation id (user specific)
 snap : 385 
 sim : 'm12b'
+# simulation directory and satellite ids location (user specific)
 sim_dir : '/home/jovyan/data/fire2/m12b_res7100/'
+sat_id_dir : '/home/jovyan/home/tracked/m12b/all_LMC_inds.txt'
 # Min and max radius [kpc]
 rmin : 20
 rmax : 300
@@ -11,8 +13,10 @@ bmin : -1
 bmax : 1
 # If True, creates mollweide plot of overdensity 
 overdensity : True
-# If True, removes the satellite mask using mask path
-sat_mask : True
+# If True, removes the satellite using satellite ids (mutually exclusive to only_sat_mask)
+sat_mask : False
+# If True, keeps only the satellite using satellite ids (mutually exclusive to sat_mask)
+only_sat_mask : True
 # If True, removes the halo using rmin and rmax
 halo_mask : True
 # If True, randomly subsamples a number of particules equal to the subsample value

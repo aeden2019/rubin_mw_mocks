@@ -42,12 +42,14 @@ def readparams(paramfile):
     snap = d["snap"]
     sim = d["sim"]
     sim_dir = d["sim_dir"]
+    sat_id_dir = d["sat_id_dir"]
     rmin = d["rmin"]
     rmax = d["rmax"]
     bmin = d["bmin"]
     bmax = d["bmax"]
     overdensity = d["overdensity"]
     sat_mask = d["sat_mask"]
+    only_sat_mask = d["only_sat_mask"]
     halo_mask = d["halo_mask"]
     rand_mask = d["rand_mask"]
     subsample = d["subsample"]
@@ -56,14 +58,20 @@ def readparams(paramfile):
     assert type(snap)==int, "snap must be an integer"
     assert type(sim)==str, "sim must be a string"
     assert type(sim_dir)==str, "sim_dir must be a string"
+    assert type(sat_id_dir)==str, "sat_id_dir must be a string"
     assert type(rmin)==int, "rmin must be an integer"
     assert type(rmax)==int, "rmax must be an integer"
     assert type(bmin)==int, "bmin must be an integer"
     assert type(bmax)==int, "bmax must be an integer"
     assert type(overdensity) == bool, "overdensity must be a bool"
     assert type(sat_mask) == bool, "sat_mask must be a bool"
+    assert type(only_sat_mask) == bool, "only_sat_mask must be a bool"
     assert type(halo_mask) == bool, "halo_mask must be a bool"
     assert type(rand_mask) == bool, "rand_mask must be a bool"
     assert type(subsample)==int, "subsample must be an integer"
+    
+    # Check that sat_mask and only_sat_mask are not both True
+    assert not (sat_mask and only_sat_mask), "sat_mask and only_sat_mask cannot both be True"
 
-    return [snap, sim, sim_dir, rmin, rmax, bmin, bmax, overdensity, sat_mask, halo_mask, rand_mask, subsample]
+    return [snap, sim, sim_dir, sat_id_dir, rmin, rmax, bmin, bmax, overdensity,
+            sat_mask, only_sat_mask, halo_mask, rand_mask, subsample]

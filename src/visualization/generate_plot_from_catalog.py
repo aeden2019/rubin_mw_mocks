@@ -19,9 +19,9 @@ if __name__ == "__main__":
     # Get the necessary variables from the parameter file
     params = allvariables.getparams()
     sim_dir = params[2]
-    bmin = params[5]
-    bmax = params[6]
-    overdensity = params[7]
+    bmin = params[6]
+    bmax = params[7]
+    overdensity = params[8]
     
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
