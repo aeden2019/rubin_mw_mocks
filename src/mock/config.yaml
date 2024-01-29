@@ -2,7 +2,7 @@
 # FIRE snapshot number and simulation id (user specific)
 snap : 385 
 sim : 'm12b'
-# simulation directory and satellite ids location (user specific)
+# Simulation directory and satellite ids location (user specific)
 sim_dir : '/home/jovyan/data/fire2/m12b_res7100/'
 sat_id_dir : '/home/jovyan/home/tracked/m12b/all_LMC_inds.txt'
 # Min and max radius [kpc]
@@ -19,7 +19,16 @@ sat_mask : False
 only_sat_mask : True
 # If True, removes the halo using rmin and rmax
 halo_mask : True
-# If True, randomly subsamples a number of particules equal to the subsample value
+# If True, randomly subsamples a number of particles equal to the subsample value
 rand_mask : True
 subsample : 10000
+# Ananke parameters
+ananke_name : 'sim'
+photo_sys : 'padova/LSST'
+cmd_magnames: 'rmag,gmag-rmag'
+app_mag_lim_lo: 17
+app_mag_lim_hi: 27.5
+abs_mag_lim_lo: -7.0
+abs_mag_lim_hi: 10.0
+ananke_r_max: 1000
 ...

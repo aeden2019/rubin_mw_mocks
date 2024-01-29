@@ -33,6 +33,14 @@ if __name__ == "__main__":
     halo_mask = params[11]
     rand_mask = params[12]
     subsample = params[13]
+    ananke_name = params[14]
+    photo_sys = params[15]
+    cmd_magnames = params[16]
+    app_mag_lim_lo = params[17]
+    app_mag_lim_hi = params[18]
+    abs_mag_lim_lo = params[19]
+    abs_mag_lim_hi = params[20]
+    ananke_r_max = params[21]
     
     # Print parameters
     print(f"Parameters:")
@@ -50,6 +58,14 @@ if __name__ == "__main__":
     print(f"  halo_mask: {halo_mask}")
     print(f"  rand_mask: {rand_mask}")
     print(f"  subsample: {subsample}")
+    print(f"  ananke_name: {ananke_name}")
+    print(f"  photo_sys: {photo_sys}")
+    print(f"  cmd_magnames: {cmd_magnames}")
+    print(f"  app_mag_lim_lo: {app_mag_lim_lo}")
+    print(f"  app_mag_lim_hi: {app_mag_lim_hi}")
+    print(f"  abs_mag_lim_lo: {abs_mag_lim_lo}")
+    print(f"  abs_mag_lim_hi: {abs_mag_lim_hi}")
+    print(f"  ananke_r_max: {ananke_r_max}")
      
     
     # Create FIRE part
@@ -149,14 +165,10 @@ if __name__ == "__main__":
     plot_ananke_inputs.plot_metalicity(p['feh'])
     
     # Initialize the ananke process with kword args
-    #name='sim'
-    name='sat_sim'
-    ananke = an.Ananke(p, name, photo_sys='padova/LSST', cmd_magnames='rmag,gmag-rmag', app_mag_lim_lo=17, app_mag_lim_hi=27.5,
-                       abs_mag_lim_lo=-7.0, abs_mag_lim_hi=10.0, r_max=1000)
-
-# TESTING - Different photometric system
-#     ananke = an.Ananke(p, name, photo_sys='padova/GAIA', cmd_magnames='Gmag,Gmag-G_RPmag', app_mag_lim_lo=17,
-#                        app_mag_lim_hi=27.5, abs_mag_lim_lo=-1000, abs_mag_lim_hi=1000, r_max=1000)
+    ananke = an.Ananke(p, name=ananke_name, photo_sys=photo_sys, cmd_magnames=cmd_magnames, 
+                       app_mag_lim_lo=app_mag_lim_lo, app_mag_lim_hi=app_mag_lim_hi,
+                       abs_mag_lim_lo=abs_mag_lim_lo, abs_mag_lim_hi=abs_mag_lim_hi,
+                       r_max=ananke_r_max)
     
     # Run ananke
     ananke.run()

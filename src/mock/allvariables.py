@@ -53,6 +53,14 @@ def readparams(paramfile):
     halo_mask = d["halo_mask"]
     rand_mask = d["rand_mask"]
     subsample = d["subsample"]
+    ananke_name = ["ananke_name"]
+    photo_sys = ["photo_sys"]
+    cmd_magnames = ["cmd_magnames"]
+    app_mag_lim_lo = ["app_mag_lim_lo"]
+    app_mag_lim_hi = ["app_mag_lim_hi"]
+    abs_mag_lim_lo = ["abs_mag_lim_lo"]
+    abs_mag_lim_hi = ["abs_mag_lim_hi"]
+    ananke_r_max = ["ananke_r_max"]
     
     # Check for correct type
     assert type(snap)==int, "snap must be an integer"
@@ -69,9 +77,19 @@ def readparams(paramfile):
     assert type(halo_mask) == bool, "halo_mask must be a bool"
     assert type(rand_mask) == bool, "rand_mask must be a bool"
     assert type(subsample)==int, "subsample must be an integer"
+    assert type(ananke_name)==str, "ananke_name must be a string"
+    assert type(photo_sys)==str, "photo_sys must be a string"
+    assert type(cmd_magnames)==str, "cmd_magnames must be a string"
+    assert type(app_mag_lim_lo)==float, "app_mag_lim_lo must be a float"
+    assert type(app_mag_lim_hi)==float, "app_mag_lim_hi must be a float"
+    assert type(abs_mag_lim_lo)==float, "abs_mag_lim_lo must be a float"
+    assert type(abs_mag_lim_hi)==float, "abs_mag_lim_hi must be a float"
+    assert type(ananke_r_max)==int, "ananke_r_max must be an integer"
     
     # Check that sat_mask and only_sat_mask are not both True
     assert not (sat_mask and only_sat_mask), "sat_mask and only_sat_mask cannot both be True"
 
     return [snap, sim, sim_dir, sat_id_dir, rmin, rmax, bmin, bmax, overdensity,
-            sat_mask, only_sat_mask, halo_mask, rand_mask, subsample]
+            sat_mask, only_sat_mask, halo_mask, rand_mask, subsample, ananke_name,
+            ananke_name, photo_sys, cmd_magnames, app_mag_lim_lo, app_mag_lim_hi,
+            abs_mag_lim_lo, abs_mag_lim_hi, ananke_r_max]
