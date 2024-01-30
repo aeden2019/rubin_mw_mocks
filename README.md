@@ -105,15 +105,15 @@ In this section you can find details regarding the input and ouput parameters fo
 
 Below is a table of the parameters used with `py-ananke` to best simulate the characteristics of the Vera Rubin telescope. These values can be changes in `src/mock/make_mock.py` during the py-ananke process `ananke = an.Ananke()`.
 
-| Parameter   | Value Used  | Description    |
-| ----------- | ----------- | -------------- |
-| particles   | p           | Dictionary of particle data from FIRE. |
-| photo_sys   | 'padova/LSST' | Photometric system Galaxia should use to generate the survey. |
-| cmd_magnames| ‘rmag,gmag-rmag’ | Names of the filters Galaxia should use for the color-magnitude diagram box selection. First argument is used for appMagLimits and the second for colorLimits. |
-| app_mag_lim_lo | 17 | Lower limit in apparent mag. Related to cmd_magnames. |
-| app_mag_lim_hi | 27.5 | Upper limit in apparent mag. Related to cmd_magnames. |
-| abs_mag_lim_lo | -7.0 | Lower limit in absolute mag. |
-| abs_mag_lim_hi | 10.0 | Upper limit in absolute mag. |
+| Parameter      | Value Used       | Description                                                   |
+| -------------- | ---------------- | ------------------------------------------                    |
+| particles      | p                | Dictionary of particle data from FIRE.                        |
+| photo_sys      | 'padova/LSST'    | Photometric system Galaxia should use to generate the survey. |
+| cmd_magnames   | ‘rmag,gmag-rmag’ | Names of the filters Galaxia should use for the color-magnitude diagram box selection. First argument is used for appMagLimits and the second for colorLimits.                             |
+| app_mag_lim_lo | 17               | Lower limit in apparent mag. Related to cmd_magnames.         |
+| app_mag_lim_hi | 27.5             | Upper limit in apparent mag. Related to cmd_magnames.         |
+| abs_mag_lim_lo | -7.0             | Lower limit in absolute mag.                                  |
+| abs_mag_lim_hi | 10.0             | Upper limit in absolute mag.                                  |
 
 ### Output Parameters <a name="ananke-parameters-output"></a> 
 
