@@ -14,9 +14,9 @@ bmax : 1
 # If True, creates mollweide plot of overdensity 
 overdensity : True
 # If True, removes the satellite using satellite ids (mutually exclusive to only_sat_mask)
-sat_mask : False
+sat_mask : True
 # If True, keeps only the satellite using satellite ids (mutually exclusive to sat_mask)
-only_sat_mask : True
+only_sat_mask : False
 # If True, removes the halo using rmin and rmax
 halo_mask : True
 # If True, randomly subsamples a number of particles equal to the subsample value
@@ -26,7 +26,7 @@ subsample : 10000
 ananke_name : 'sim'
 photo_sys : 'padova/LSST'
 cmd_magnames: 'rmag,gmag-rmag'
-app_mag_lim_lo: 17
+app_mag_lim_lo: 17.0
 app_mag_lim_hi: 27.5
 abs_mag_lim_lo: -7.0
 abs_mag_lim_hi: 10.0

@@ -11,6 +11,14 @@ import os
 
 
 def getparams():
+    """
+    Parses the config.yaml file for use in readparams(). 
+    
+    Output:
+    paramfile = parsed config.yaml file from getparams()
+    
+    """
+    
     # Parse the parameter file
     parser = ArgumentParser(description="Parameters file for make_mock.py")
     parser.add_argument(
@@ -27,6 +35,16 @@ def getparams():
 
 
 def readparams(paramfile):
+    """
+    Reads the output of getparams(), asserts that each parameter is the correct type, and returns an array of parameters. 
+     
+    Input: 
+    paramfile = parsed config.yaml file from getparams()
+    
+    Output:
+    array of parameters in correct types
+    
+    """
     
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
