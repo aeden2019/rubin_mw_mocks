@@ -3,6 +3,13 @@ Satellite removal functions from Arpit.
 
 Note, you want to use the new rockstar catalogs i.e rockstar_dm_new to do all of this.
 
+Now the following fx call for whatever simulation directory you want and snapshot  will remove all the substructure with total mass between 1e8--3e11:
+MW_dark_inds = cc.remove_dark_substructure(sim_dir, nsnap, mass_cuts=[1e8, 3e11])
+
+You can plot them as:
+pos_dark = part['dark'].prop('host.distance.principal')
+plt.hist2d(pos_dark[MW_dark_inds,0], pos_dark[MW_dark_inds,1], bins=np.linspace(-300, 300, 300), norm=LogNorm(),)
+
 """
 
 
