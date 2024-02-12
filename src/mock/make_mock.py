@@ -164,8 +164,10 @@ if __name__ == "__main__":
     plot_ananke_inputs.plot_stellar_ages(p['age'])
     plot_ananke_inputs.plot_metalicity(p['feh'])
     
+    fsample = 0.05
+    
     # Initialize the ananke process with kword args
-    ananke = an.Ananke(p, name=ananke_name, photo_sys=photo_sys, cmd_magnames=cmd_magnames, 
+    ananke = an.Ananke(p, fsample=fsample , name=ananke_name, photo_sys=photo_sys, cmd_magnames=cmd_magnames, 
                        app_mag_lim_lo=app_mag_lim_lo, app_mag_lim_hi=app_mag_lim_hi,
                        abs_mag_lim_lo=abs_mag_lim_lo, abs_mag_lim_hi=abs_mag_lim_hi,
                        r_max=ananke_r_max)

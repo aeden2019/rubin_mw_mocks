@@ -1,9 +1,9 @@
 ---
 # FIRE snapshot number and simulation id (user specific)
 snap : 385 
-sim : 'm12b'
+sim : 'm12i'
 # Simulation directory and satellite ids location (user specific)
-sim_dir : '/home/jovyan/data/fire2/m12b_res7100/'
+sim_dir : '/home/jovyan/data/fire2/m12i_res7100/'
 sat_id_dir : '/home/jovyan/home/tracked/m12b/all_LMC_inds.txt'
 # Min and max radius [kpc]
 rmin : 20
@@ -23,12 +23,12 @@ halo_mask : True
 rand_mask : True
 subsample : 10000
 # Ananke parameters
-ananke_name : 'sim'
-photo_sys : 'padova/LSST'
-cmd_magnames: 'rmag,gmag-rmag'
-app_mag_lim_lo: 17.0
-app_mag_lim_hi: 27.5
-abs_mag_lim_lo: -7.0
-abs_mag_lim_hi: 10.0
+ananke_name : 'sim_anankethon'
+photo_sys : 'padova/WFIRST-HST'
+cmd_magnames: 'F814W,F555W-F814W'
+app_mag_lim_lo: -1000.0
+app_mag_lim_hi: 1000.0
+abs_mag_lim_lo: -1000.0
+abs_mag_lim_hi: 5.0
 ananke_r_max: 1000
 ...
