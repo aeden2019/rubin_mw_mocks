@@ -13,6 +13,7 @@ plt.hist2d(pos_dark[MW_dark_inds,0], pos_dark[MW_dark_inds,1], bins=np.linspace(
 """
 
 
+
 ## Reading Rockstar dark matter particle assignments. 
 def read_particle_assignments(sim_dir, nsnap, rockstar_directory='halo/rockstar_dm_new/'):
     """
@@ -123,6 +124,8 @@ def remove_dark_substructure(sim_dir, nsnap,
                                                                       return_sub=True)
 
     """
+    import halo_analysis as halo
+    import numpy as np
     
     if hal_IDs is None:
         hal = halo.io.IO.read_catalogs('index', nsnap, sim_dir, species=['dark'], **kwargs)
