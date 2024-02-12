@@ -67,15 +67,11 @@ if __name__ == "__main__":
     print(f"  abs_mag_lim_lo: {abs_mag_lim_lo}")
     print(f"  abs_mag_lim_hi: {abs_mag_lim_hi}")
     print(f"  ananke_r_max: {ananke_r_max}")
+    
+    
+    
      
-    
-#     # Create FIRE part
-#     part = ga.io.Read.read_snapshots(['star'], 'index', snap, sim_dir, assign_hosts=True)
-    
-#     # Declare position and velocity
-#     pos = part['star'].prop('host.distance')
-#     vel = part['star'].prop('host.velocity')
-
+    # Read in star particles from the selected fire2 snapshot
     redshift = 0.
     
     part = ga.io.Read.read_snapshots(species='star',
@@ -87,65 +83,9 @@ if __name__ == "__main__":
                                  assign_hosts_rotation=True,
                                  assign_orbits=True)
     
-#     # Blank satellite mask
-#     satellite_mask = np.ones(len(pos), dtype=bool)
     
-#     # Store satellite indices (from Mia)
-#     all_unique_lmc_inds = np.loadtxt(sat_id_dir)
-#     all_inds = part['star'].prop('id')
-#     remaining_indices = np.setdiff1d(all_inds, np.array(all_unique_lmc_inds))
-#     id_indices = np.where(np.isin(all_inds, remaining_indices))[0]
-#     only_lmc_indices = np.where(~np.isin(all_inds, remaining_indices))[0]
     
-#     # Remove satellite
-#     if sat_mask:
-#         print("* Removing satellite with mask \n")
-        
-#         # Update satellite mask 
-#         satellite_mask[only_lmc_indices] = 0
-
-#         # Apply satellite mask
-#         pos = pos[satellite_mask]     
-#         vel = vel[satellite_mask]
-        
-#     # Include only the satellite mask
-#     if only_sat_mask:
-#         print("* Removing non-satellite objects with mask \n")
-        
-#         # Update satellite mask 
-#         satellite_mask[id_indices] = 0
-
-#         # Apply satellite mask
-#         pos = pos[satellite_mask]     
-#         vel = vel[satellite_mask]
-         
-            
-#     # Blank halo mask
-#     dist_cut1 = np.ones(len(pos), dtype=bool)
-        
-#     # Removing outer halo
-#     if halo_mask:
-#         print("* Removing halo with mask \n")
-#         # Create outer halo distance mask
-#         dist = np.sqrt(np.sum(pos**2, axis=1))
-#         dist_cut1 = np.where((dist > rmin) & (dist< rmax)) 
     
-#         # Apply outer halo distance mask
-#         pos = pos[dist_cut1]
-#         vel = vel[dist_cut1]
-        
-    
-#     # Blank random mask   
-#     rand_cut1 = np.ones(len(pos), dtype=bool)
-   
-#     # Apply random subsampling
-#     if rand_mask:
-#         print(f"* Applying subsample of {subsample} particles to the dataset of {len(pos)} particles \n")
-#         # Create random cut
-#         rand_cut1 = np.random.randint(0, len(pos), subsample)
-#         pos = pos[rand_cut1]
-#         vel = vel[rand_cut1]
-
     # array of positions in principal axes (in kpc)
     pos_pa = part['star'].prop('host.distance.principal')
 
@@ -167,46 +107,11 @@ if __name__ == "__main__":
 
     # alpha abundance (Mg/Fe)
     alpha = abundances['magnesium'] - feh
-     
-#     #Create p dictionary to store particle data
-#     p = {}
-#     p['pos3'] = pos       # position in kpc
-#     p['vel3'] = vel       # velocity in km/s
-#     p['mass'] = part['star']['mass']                     # mass in solar masses
-#     p['age'] = part['star'].prop('age')                  # log age in Gyr
-#     p['feh'] = part['star'].prop('metallicity.fe')       # [Fe/H]
-#     p['helium'] = part['star'].prop('metallicity.he')    # [He/H]
-#     p['carbon'] = part['star'].prop('metallicity.c')     # [C/H]
-#     p['nitrogen'] = part['star'].prop('metallicity.n')   # [N/H]
-#     p['neon'] = part['star'].prop('metallicity.ne')      # [Ne/H]
-#     p['magnesium'] = part['star'].prop('metallicity.mg') # [Mg/H]
-#     p['silicon'] = part['star'].prop('metallicity.si')   # [Si/H]
-#     p['sulphur'] = part['star'].prop('metallicity.s')    # [S/H]
-#     p['calcium'] = part['star'].prop('metallicity.ca')   # [Ca/H]
-#     p['oxygen'] = part['star'].prop('metallicity.o')     # [O/H]
-#     p['alpha'] = part['star'].prop('metallicity.mg - metallicity.fe') # [Mg/Fe]
-#     p['parentid'] = part['star']['id'] # indices of parent particles in snapshot
-#     p['dform'] = np.zeros(part['star']['position'].shape[0], dtype='float32') # dummy var
-   
-#     # Assert that the lengths are the same
-#     assert len(p['pos3']) == len(p['vel3']), "Pos has different length than vel when creating p dictionary"
-#     assert len(p['pos3']) == len(p['mass']), "Pos has different length than mass when creating p dictionary"
     
-#     # Plotting for testing
-#     print("Plotting stellar ages and metalicity of ananke input")
-#     plot_ananke_inputs.plot_stellar_ages(p['age'])
-#     plot_ananke_inputs.plot_metalicity(p['feh'])
     
-#     # Initialize the ananke process with kword args
-#     ananke = an.Ananke(p, name=ananke_name, photo_sys=photo_sys, cmd_magnames=cmd_magnames, 
-#                        app_mag_lim_lo=app_mag_lim_lo, app_mag_lim_hi=app_mag_lim_hi,
-#                        abs_mag_lim_lo=abs_mag_lim_lo, abs_mag_lim_hi=abs_mag_lim_hi,
-#                        r_max=ananke_r_max)
     
-#     # Run ananke
-#     ananke.run()
-
-
+    
+    # Preparing the star particles data to be used by ananke, masking only a sphere within 30 kpc
     mask = np.linalg.norm(pos_pa, axis=1)<=30
 
     p = {}
@@ -223,33 +128,14 @@ if __name__ == "__main__":
     p['parentid'] = np.where(mask)[0]           # indices of parent particles in snapshot
     p['dform'] = 0*p['mass']  # dummy variable for now
     
+    
+    
+    
+    # Now we can prepare the ananke surveyor. Default surveyor is set to simulate a Roman + HST photometric system.
     fsample = 0.005
     
     surveyor = an.Ananke(p, name='anankethon', fsample=fsample, rSun0=0, rSun1=0, rSun2=0, 
                          photo_sys=photo_sys, cmd_magnames=cmd_magnames, abs_mag_lim_hi=abs_mag_lim_hi)
     
     survey = surveyor.run()
-    
-#     # Plotting for testing
-#     luminosity = survey.lum.to_numpy()
-#     temperature = survey.teff.to_numpy()
-
-#     fig3,axs=plt.subplots(nrows=1,ncols=3,figsize=(20,8), subplot_kw={'adjustable':'box'})
-#     fig3.subplots_adjust(wspace=0.8)
-#     for ax in axs[1:]: ax.set_visible(False)
-
-#     hb = axs[0].hexbin(temperature, luminosity, gridsize=(241),
-#                        bins='log', cmap=hex_cmap)
-
-#     axs[0].invert_xaxis()
-#     axs[0].set_xlabel('log10(Temperature [Kelvin])')
-#     axs[0].set_ylabel('log10(Luminosity [Lsun])')
-#     axs[0].set_aspect(1.0/axs[0].get_data_ratio())
-
-#     ax0color_axis = axs[0].inset_axes([1, 0., 0.03, 1.], transform=axs[0].transAxes)
-
-#     ax0cbar = fig.colorbar(hb, cax=ax0color_axis, location='right')
-#     ax0cbar.set_label('Number of stars\nper hexcell')
-    
-#     fig3.savefig('hexbin_plot.png')
-   
+  
