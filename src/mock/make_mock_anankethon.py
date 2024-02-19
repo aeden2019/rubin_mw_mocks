@@ -72,6 +72,7 @@ if __name__ == "__main__":
     
      
     # Read in star particles from the selected fire2 snapshot
+    #redshift = 0.50239229 #snap 385
     redshift = 0.
     
     part = ga.io.Read.read_snapshots(species='star',
@@ -112,7 +113,30 @@ if __name__ == "__main__":
     
     
     # Preparing the star particles data to be used by ananke, masking only a sphere within 30 kpc
-    mask = np.linalg.norm(pos_pa, axis=1)<=30
+    #mask = np.linalg.norm(pos_pa, axis=1)<=30
+    distance_mask = (np.linalg.norm(pos_pa, axis=1) >= rmin) & (np.linalg.norm(pos_pa, axis=1) <= rmax)
+    
+    # Blank satellite mask
+    satellite_mask = np.ones(len(pos_pa), dtype=bool)
+    
+    # Store satellite indices (from Mia)
+    all_unique_lmc_inds = np.loadtxt(sat_id_dir)
+    all_inds = part['star'].prop('id')
+    remaining_indices = np.setdiff1d(all_inds, np.array(all_unique_lmc_inds))
+    id_indices = np.where(np.isin(all_inds, remaining_indices))[0]
+    only_lmc_indices = np.where(~np.isin(all_inds, remaining_indices))[0]
+    
+    # Remove satellite
+    if sat_mask:
+        print("* Removing satellite with mask \n")
+        
+        # Update satellite mask 
+        satellite_mask[only_lmc_indices] = False
+        
+   # Combine masks
+    mask = distance_mask & satellite_mask
+        
+              
 
     p = {}
     p['pos3'] = pos_pa[mask]    # position in kpc (Nx3)
@@ -134,7 +158,7 @@ if __name__ == "__main__":
     # Now we can prepare the ananke surveyor. Default surveyor is set to simulate a Roman + HST photometric system.
     fsample = 0.005
     
-    surveyor = an.Ananke(p, name='anankethon', fsample=fsample, rSun0=0, rSun1=0, rSun2=0, 
+    surveyor = an.Ananke(p, name=ananke_name, fsample=fsample, rSun0=0, rSun1=0, rSun2=0, 
                          photo_sys=photo_sys, cmd_magnames=cmd_magnames, abs_mag_lim_hi=abs_mag_lim_hi)
     
     survey = surveyor.run()
