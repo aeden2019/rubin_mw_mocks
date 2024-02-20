@@ -25,7 +25,7 @@ if __name__ == "__main__":
         "bmin", "bmax", "overdensity", "sat_mask", "only_sat_mask", 
         "halo_mask", "rand_mask", "subsample", "ananke_name", 
         "photo_sys", "cmd_magnames", "app_mag_lim_lo", "app_mag_lim_hi", 
-        "abs_mag_lim_lo", "abs_mag_lim_hi", "ananke_r_max"
+        "abs_mag_lim_lo", "abs_mag_lim_hi", "ananke_r_max", "fsample"
     ]
 
     # Initialize parameter dictionary
@@ -84,6 +84,7 @@ if __name__ == "__main__":
     print(f"  abs_mag_lim_lo: {abs_mag_lim_lo}")
     print(f"  abs_mag_lim_hi: {abs_mag_lim_hi}")
     print(f"  ananke_r_max: {ananke_r_max}")
+    print(f"  fsample: {fsample}")
     
     
     
@@ -173,7 +174,7 @@ if __name__ == "__main__":
     
     
     # Now we can prepare the ananke surveyor. Default surveyor is set to simulate a Roman + HST photometric system.
-    fsample = 0.005
+    #fsample = 0.005
     
     surveyor = an.Ananke(p, name=ananke_name, fsample=fsample, rSun0=0, rSun1=0, rSun2=0, 
                          photo_sys=photo_sys, cmd_magnames=cmd_magnames, abs_mag_lim_hi=abs_mag_lim_hi)

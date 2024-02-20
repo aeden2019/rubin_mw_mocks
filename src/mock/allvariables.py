@@ -79,6 +79,7 @@ def readparams(paramfile):
     abs_mag_lim_lo = d["abs_mag_lim_lo"]
     abs_mag_lim_hi = d["abs_mag_lim_hi"]
     ananke_r_max = d["ananke_r_max"]
+    fsample = d["fsample"]
     
     # Check for correct type
     assert isinstance(snap, int), f"snap must be of type int, but got {type(snap)}"
@@ -103,6 +104,7 @@ def readparams(paramfile):
     assert isinstance(abs_mag_lim_lo, float), f"abs_mag_lim_lo must be of type float, but got {type(abs_mag_lim_lo)}"
     assert isinstance(abs_mag_lim_hi, float), f"abs_mag_lim_hi must be of type float, but got {type(abs_mag_lim_hi)}"
     assert isinstance(ananke_r_max, int), f"ananke_r_max must be of type int, but got {type(ananke_r_max)}"
+    assert isinstance(fsample, float), f"fsample must be of type float, but got {type(fsample)}"
 
     
     # Check that sat_mask and only_sat_mask are not both True
@@ -111,4 +113,4 @@ def readparams(paramfile):
     return [snap, sim, sim_dir, sat_id_dir, rmin, rmax, bmin, bmax, overdensity,
             sat_mask, only_sat_mask, halo_mask, rand_mask, subsample, ananke_name,
             photo_sys, cmd_magnames, app_mag_lim_lo, app_mag_lim_hi,
-            abs_mag_lim_lo, abs_mag_lim_hi, ananke_r_max]
+            abs_mag_lim_lo, abs_mag_lim_hi, ananke_r_max, fsample]
