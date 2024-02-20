@@ -18,30 +18,47 @@ if __name__ == "__main__":
  
     # Get the parameters from the config file
     params = allvariables.getparams()
+
+    # Define parameter names
+    param_names = [
+        "snap", "sim", "sim_dir", "sat_id_dir", "rmin", "rmax", 
+        "bmin", "bmax", "overdensity", "sat_mask", "only_sat_mask", 
+        "halo_mask", "rand_mask", "subsample", "ananke_name", 
+        "photo_sys", "cmd_magnames", "app_mag_lim_lo", "app_mag_lim_hi", 
+        "abs_mag_lim_lo", "abs_mag_lim_hi", "ananke_r_max"
+    ]
+
+    # Initialize parameter dictionary
+    params_dict = {}
+
+    # Assign values to parameters and declare them locally
+    for param_name, param_value in zip(param_names, params):
+        params_dict[param_name] = param_value
+        locals()[param_name] = param_value
     
-    # Declare all the parameters locally
-    snap = params[0]
-    sim = params[1]
-    sim_dir = params[2]
-    sat_id_dir = params[3]
-    rmin = params[4]
-    rmax = params[5]
-    bmin = params[6]
-    bmax = params[7]
-    overdensity = params[8]
-    sat_mask = params[9]
-    only_sat_mask = params[10]
-    halo_mask = params[11]
-    rand_mask = params[12]
-    subsample = params[13]
-    ananke_name = params[14]
-    photo_sys = params[15]
-    cmd_magnames = params[16]
-    app_mag_lim_lo = params[17]
-    app_mag_lim_hi = params[18]
-    abs_mag_lim_lo = params[19]
-    abs_mag_lim_hi = params[20]
-    ananke_r_max = params[21]
+#     # Declare all the parameters locally
+#     snap = params[0]
+#     sim = params[1]
+#     sim_dir = params[2]
+#     sat_id_dir = params[3]
+#     rmin = params[4]
+#     rmax = params[5]
+#     bmin = params[6]
+#     bmax = params[7]
+#     overdensity = params[8]
+#     sat_mask = params[9]
+#     only_sat_mask = params[10]
+#     halo_mask = params[11]
+#     rand_mask = params[12]
+#     subsample = params[13]
+#     ananke_name = params[14]
+#     photo_sys = params[15]
+#     cmd_magnames = params[16]
+#     app_mag_lim_lo = params[17]
+#     app_mag_lim_hi = params[18]
+#     abs_mag_lim_lo = params[19]
+#     abs_mag_lim_hi = params[20]
+#     ananke_r_max = params[21]
     
     # Print parameters (for debugging)
     print(f"Parameters:")
