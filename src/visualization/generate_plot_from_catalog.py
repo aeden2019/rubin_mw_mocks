@@ -16,13 +16,25 @@ import os
 
 if __name__ == "__main__":
   
-    # Get the necessary variables from the parameter file
+    # Get the parameters from the config file
     params = allvariables.getparams()
-    sim_dir = params[2]
-    bmin = params[6]
-    bmax = params[7]
-    overdensity = params[8]
-    ananke_name = params[14]
+
+    # Define parameter names
+    param_names = [
+        "snap", "sim", "sim_dir", "sat_id_dir", "rmin", "rmax", 
+        "bmin", "bmax", "overdensity", "sat_mask", "only_sat_mask", 
+        "halo_mask", "rand_mask", "subsample", "ananke_name", 
+        "photo_sys", "cmd_magnames", "app_mag_lim_lo", "app_mag_lim_hi", 
+        "abs_mag_lim_lo", "abs_mag_lim_hi", "ananke_r_max", "fsample"
+    ]
+
+    # Initialize parameter dictionary
+    params_dict = {}
+
+    # Assign values to parameters and declare them locally
+    for param_name, param_value in zip(param_names, params):
+        params_dict[param_name] = param_value
+        locals()[param_name] = param_value
     
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))

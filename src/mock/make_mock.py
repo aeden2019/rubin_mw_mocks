@@ -1,6 +1,5 @@
 """
-Create ANANKE mock catalog from FIRE data with the intent of replicating the anankethon results
-(see https://github.com/athob/anankethon/blob/main/usage_example.ipynb)
+Create ANANKE mock catalog from FIRE data.
 
 """
 
@@ -35,30 +34,6 @@ if __name__ == "__main__":
     for param_name, param_value in zip(param_names, params):
         params_dict[param_name] = param_value
         locals()[param_name] = param_value
-    
-#     # Declare all the parameters locally
-#     snap = params[0]
-#     sim = params[1]
-#     sim_dir = params[2]
-#     sat_id_dir = params[3]
-#     rmin = params[4]
-#     rmax = params[5]
-#     bmin = params[6]
-#     bmax = params[7]
-#     overdensity = params[8]
-#     sat_mask = params[9]
-#     only_sat_mask = params[10]
-#     halo_mask = params[11]
-#     rand_mask = params[12]
-#     subsample = params[13]
-#     ananke_name = params[14]
-#     photo_sys = params[15]
-#     cmd_magnames = params[16]
-#     app_mag_lim_lo = params[17]
-#     app_mag_lim_hi = params[18]
-#     abs_mag_lim_lo = params[19]
-#     abs_mag_lim_hi = params[20]
-#     ananke_r_max = params[21]
     
     # Print parameters (for debugging)
     print(f"Parameters:")
@@ -174,8 +149,6 @@ if __name__ == "__main__":
     
     
     # Now we can prepare the ananke surveyor. Default surveyor is set to simulate a Roman + HST photometric system.
-    #fsample = 0.005
-    
     surveyor = an.Ananke(p, name=ananke_name, fsample=fsample, rSun0=0, rSun1=0, rSun2=0, 
                          photo_sys=photo_sys, cmd_magnames=cmd_magnames, abs_mag_lim_hi=abs_mag_lim_hi)
     
