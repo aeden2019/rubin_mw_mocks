@@ -56,6 +56,11 @@ Specific requirements (see explanations below):
 * nba
 * pygadgetreader
 
+For an easy installation of these packages, you can also use the provided shell script as follows:
+```Bash 
+bash dependencies.sh
+```
+
 ### Gizmo Analysis <a name="requirements-gizmo-analysis"></a> 
 
 This module is part of the processing for FIRE. Written by Andrew Wetzel, it can be found here: [https://bitbucket.org/awetzel/gizmo_analysis/src/master/](https://bitbucket.org/awetzel/gizmo_analysis/src/master/). Note that it also requires the [\utilities](https://bitbucket.org/awetzel/utilities/src/master/) package.  
