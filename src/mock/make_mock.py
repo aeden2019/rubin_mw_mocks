@@ -20,9 +20,7 @@ if __name__ == "__main__":
 
     # Define parameter names
     param_names = [
-        "snap", "sim", "sim_dir", "sat_id_dir", "rmin", "rmax", 
-        "bmin", "bmax", "overdensity", "sat_mask", "only_sat_mask", 
-        "halo_mask", "rand_mask", "subsample", "ananke_name", 
+        "snap", "sim", "sim_dir", "sat_id_dir", "rmin", "rmax", "sat_mask", "ananke_name", 
         "photo_sys", "cmd_magnames", "app_mag_lim_lo", "app_mag_lim_hi", 
         "abs_mag_lim_lo", "abs_mag_lim_hi", "ananke_r_max", "fsample"
     ]
@@ -43,14 +41,7 @@ if __name__ == "__main__":
     print(f"  sat_id_dir: {sat_id_dir}")
     print(f"  rmin: {rmin}")
     print(f"  rmax: {rmax}")
-    print(f"  bmin: {bmin}")
-    print(f"  bmax: {bmax}")
-    print(f"  overdensity: {overdensity}")
     print(f"  sat_mask: {sat_mask}")
-    print(f"  only_sat_mask: {only_sat_mask}")
-    print(f"  halo_mask: {halo_mask}")
-    print(f"  rand_mask: {rand_mask}")
-    print(f"  subsample: {subsample}")
     print(f"  ananke_name: {ananke_name}")
     print(f"  photo_sys: {photo_sys}")
     print(f"  cmd_magnames: {cmd_magnames}")

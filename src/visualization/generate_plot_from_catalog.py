@@ -1,5 +1,5 @@
 """
-Script to generate mollweide plot from ananke mock catalog
+Script to generate mollweide overdensity plot from ananke mock catalog
 
 """
 
@@ -21,9 +21,7 @@ if __name__ == "__main__":
 
     # Define parameter names
     param_names = [
-        "snap", "sim", "sim_dir", "sat_id_dir", "rmin", "rmax", 
-        "bmin", "bmax", "overdensity", "sat_mask", "only_sat_mask", 
-        "halo_mask", "rand_mask", "subsample", "ananke_name", 
+        "snap", "sim", "sim_dir", "sat_id_dir", "rmin", "rmax", "sat_mask", "ananke_name", 
         "photo_sys", "cmd_magnames", "app_mag_lim_lo", "app_mag_lim_hi", 
         "abs_mag_lim_lo", "abs_mag_lim_hi", "ananke_r_max", "fsample"
     ]
@@ -56,9 +54,14 @@ if __name__ == "__main__":
     pos_galactic_ananke = kinematics1_ananke.pos_cartesian_to_galactic()
     vel_galactic_ananke = kinematics1_ananke.vel_cartesian_to_galactic()
     
-    # Create mollwiede plot
-    print("Creating mollweide plot")
-    figname = f"{ananke_name}_mollweide_plot.png"
+    # Declare default params for overdensity
+    bmin = -1
+    bmax = 1
+    overdensity = True
+    
+    # Create mollwiede overdensity plot
+    print("Creating mollweide overdensity plot")
+    figname = f"{ananke_name}_mollweide_overdensity_plot.png"
     pl.mollweide_projection(pos_galactic_ananke[0]*180/np.pi, pos_galactic_ananke[1]*180/np.pi, 0, 0, 
                             sim_dir=sim_dir, bmin=bmin, bmax=bmax, nside=40, smooth=5, overdensity=overdensity, figname=figname)
     

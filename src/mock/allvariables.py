@@ -9,6 +9,20 @@ from argparse import ArgumentParser
 import os
 
 
+def getparamsnotebook(paramfile="config.yaml"):
+    """
+    Parses the config.yaml file for use in readparams(). 
+    This version is specific for notebooks to avoid command line argument parsing. 
+    
+    Output:
+    paramfile = parsed config.yaml file from getparams()
+    
+    """
+    
+    params = readparams(paramfile)
+    
+    return params
+
 
 def getparams():
     """
@@ -63,14 +77,7 @@ def readparams(paramfile):
     sat_id_dir = d["sat_id_dir"]
     rmin = d["rmin"]
     rmax = d["rmax"]
-    bmin = d["bmin"]
-    bmax = d["bmax"]
-    overdensity = d["overdensity"]
     sat_mask = d["sat_mask"]
-    only_sat_mask = d["only_sat_mask"]
-    halo_mask = d["halo_mask"]
-    rand_mask = d["rand_mask"]
-    subsample = d["subsample"]
     ananke_name = d["ananke_name"]
     photo_sys = d["photo_sys"]
     cmd_magnames = d["cmd_magnames"]
@@ -88,14 +95,7 @@ def readparams(paramfile):
     assert isinstance(sat_id_dir, str), f"sat_id_dir must be of type str, but got {type(sat_id_dir)}"
     assert isinstance(rmin, int), f"rmin must be of type int, but got {type(rmin)}"
     assert isinstance(rmax, int), f"rmax must be of type int, but got {type(rmax)}"
-    assert isinstance(bmin, int), f"bmin must be of type int, but got {type(bmin)}"
-    assert isinstance(bmax, int), f"bmax must be of type int, but got {type(bmax)}"
-    assert isinstance(overdensity, bool), f"overdensity must be of type bool, but got {type(overdensity)}"
     assert isinstance(sat_mask, bool), f"sat_mask must be of type bool, but got {type(sat_mask)}"
-    assert isinstance(only_sat_mask, bool), f"only_sat_mask must be of type bool, but got {type(only_sat_mask)}"
-    assert isinstance(halo_mask, bool), f"halo_mask must be of type bool, but got {type(halo_mask)}"
-    assert isinstance(rand_mask, bool), f"rand_mask must be of type bool, but got {type(rand_mask)}"
-    assert isinstance(subsample, int), f"subsample must be of type int, but got {type(subsample)}"
     assert isinstance(ananke_name, str), f"ananke_name must be of type str, but got {type(ananke_name)}"
     assert isinstance(photo_sys, str), f"photo_sys must be of type str, but got {type(photo_sys)}"
     assert isinstance(cmd_magnames, str), f"cmd_magnames must be of type str, but got {type(cmd_magnames)}"
@@ -106,11 +106,8 @@ def readparams(paramfile):
     assert isinstance(ananke_r_max, int), f"ananke_r_max must be of type int, but got {type(ananke_r_max)}"
     assert isinstance(fsample, float), f"fsample must be of type float, but got {type(fsample)}"
 
-    
-    # Check that sat_mask and only_sat_mask are not both True
-    assert not (sat_mask and only_sat_mask), "sat_mask and only_sat_mask cannot both be True"
 
-    return [snap, sim, sim_dir, sat_id_dir, rmin, rmax, bmin, bmax, overdensity,
-            sat_mask, only_sat_mask, halo_mask, rand_mask, subsample, ananke_name,
+
+    return [snap, sim, sim_dir, sat_id_dir, rmin, rmax, sat_mask, ananke_name,
             photo_sys, cmd_magnames, app_mag_lim_lo, app_mag_lim_hi,
             abs_mag_lim_lo, abs_mag_lim_hi, ananke_r_max, fsample]
