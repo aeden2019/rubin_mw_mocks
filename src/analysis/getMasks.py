@@ -23,7 +23,9 @@ def getMSTO(g_minus_r, g_mag):
     
     """
     
-    msto_mask = (g_minus_r > 0.2) & (g_minus_r < 0.4) & (g_mag > 4)
+    msto_mask = ((g_minus_r > 0.2) & 
+                (g_minus_r < 0.4) & 
+                (g_mag > 4))
     
     return msto_mask
 
@@ -46,9 +48,12 @@ def getBHB(g_minus_r, u_minus_g, g_mag):
     
     """
     
-    bhb_mask = ((u_minus_g > 0.98) & (u_minus_g < 1.28) &
-                (g_minus_r > -0.27) & (g_minus_r < -0.06) &
-                ((((u_minus_g - 0.215) / 0.215) * 2 + ((g_minus_r + 0.06) / 0.17) * 2) >= 1))
+    bhb_mask = ((u_minus_g > 0.98) & 
+                (u_minus_g < 1.28) &
+                (g_minus_r > -0.27) & 
+                (g_minus_r < -0.06) &
+                ((((u_minus_g - 0.215) / 0.215) * 2 + 
+                  ((g_minus_r + 0.06) / 0.17) * 2) >= 1))
     
     return bhb_mask
 
@@ -75,9 +80,12 @@ def getKGiant(g_minus_r, u_minus_g, g_mag, feh):
     
     """
     
-    kgiant_mask = ((g_minus_r > 0.5) & (g_minus_r < 1.3) &
-                   (u_minus_g > 0.5) & (u_minus_g < 3.5) &
-                   (g_minus_r <= ((0.087 * feh * 2) + (0.39 * feh) + 0.96)) & 
+    kgiant_mask = ((g_minus_r > 0.5) &
+                   (g_minus_r < 1.3) &
+                   (u_minus_g > 0.5) &
+                   (u_minus_g < 3.5) &
+                   (g_minus_r <= ((0.087 * feh * 2)
+                                  + (0.39 * feh) + 0.96)) & 
                    (g_mag < 4))
     
     return kgiant_mask
