@@ -54,11 +54,13 @@ if __name__ == "__main__":
     
     
     
-     
+    # Convert snapshot number to redshift
+    times_path = '{}snapshot_times.txt'.format(sim_dir)
+    times = np.loadtxt(times_path, skiprows=3)
+    redshift = times[snap, 2]
+   
     # Read in star particles from the selected fire2 snapshot
-    #redshift = 0.50239229 #snap 385
-    redshift = 0.
-    
+    #redshift = 0.
     part = ga.io.Read.read_snapshots(species='star',
                                  snapshot_value_kind='redshift',
                                  snapshot_values=redshift,
