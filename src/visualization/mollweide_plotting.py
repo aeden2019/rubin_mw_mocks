@@ -30,6 +30,11 @@ def mollweide_projection(l, b, l2, b2, sim_dir, bmin, bmax, nside, smooth, q=[0]
     
     mwlmc_indices = hp.ang2pix(nside,  (90-b)*np.pi/180., l*np.pi/180.)
     npix = hp.nside2npix(nside)
+    
+    # TESTING - Add log scale option
+    logscale = False
+    if 'logscale' in kwargs.keys():
+        logscale = kwargs['logscale']
  
     idx, counts = np.unique(mwlmc_indices, return_counts=True)
     degsq = hp.nside2pixarea(nside, degrees=True)
@@ -41,6 +46,9 @@ def mollweide_projection(l, b, l2, b2, sim_dir, bmin, bmax, nside, smooth, q=[0]
         for i in idx:
             pix_ids = np.where(mwlmc_indices==i)[0]
             counts[k] = np.mean(q[pix_ids])
+            # TESTING - Add log scale
+            if logscale:
+               counts[k] = np.log(np.mean(q[pix_ids]))    
             k+=1
         hpx_map[idx] = counts
     else :
