@@ -127,12 +127,12 @@ def mollweide_projection(l, b, l2, b2, sim_dir, bmin, bmax, nside, smooth, q=[0]
             if overdensity: 
                 cax.set_xlabel(r"$\Delta\rho$ / $\rho$", fontsize=20)
             else: 
-                cax.set_xlabel(r"$\rho$", fontsize=20)
+                cax.set_xlabel(r"$\N/degree^2$", fontsize=20)
     else: 
         if overdensity: 
             cax.set_xlabel(r"$\Delta\rho$ / $\rho$", fontsize=20)
         else: 
-            cax.set_xlabel(r"$\rho$", fontsize=20)
+            cax.set_xlabel(r"$N/degree^2$", fontsize=20)
        
     
     if 'figname' in kwargs.keys():
