@@ -5,6 +5,7 @@ cd packages/
 # Install modules available through pip
 pip install args
 pip install pynbody
+pip install healsparse
 
 # Clone nba repo and install via pip
 git clone https://github.com/jngaravitoc/nba
