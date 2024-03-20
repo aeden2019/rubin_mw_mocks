@@ -142,7 +142,7 @@ if __name__ == "__main__":
     
     
     # Now we can prepare the ananke surveyor. Default surveyor is set to simulate a Roman + HST photometric system.
-    surveyor = an.Ananke(p, name=ananke_name, fsample=fsample, rSun0=0, rSun1=0, rSun2=0, 
+    surveyor = an.Ananke(p, name=ananke_name, fsample=fsample, 
                          photo_sys=photo_sys, cmd_magnames=cmd_magnames, abs_mag_lim_hi=abs_mag_lim_hi)
     
     survey = surveyor.run()
