@@ -16,6 +16,10 @@ def getSigmaVisit():
     
     Parameters:
     -----------
+    colorband : string
+        Indicates the color band to use among 'ugrizy'.
+    mag : float
+        Magnitude. 
     
     
     Returns:
@@ -24,16 +28,16 @@ def getSigmaVisit():
         Expected photometric error in magnitudes for a single visit. 
     """
     
-    # Get the systematic and random errors (UPDATE THESE WITH INPUT PARAMS)
+    # Get the systematic and random errors
     sigma_sys = getSigmaSys()
-    sigma_rand = getSigmaRand()
+    sigma_rand = getSigmaRand(colorband, mag)
     
     return np.sqrt(sigma_sys**2 + sigma_rand**2)
 
 
 
 
-def getSigmaRand(colorband, mag, X, tvis=30):    
+def getSigmaRand(colorband, mag, X=1.2, tvis=30):    
     """
     Returns the random photometric error.
     
@@ -95,7 +99,7 @@ def getSigmaSys():
         
     """
     
-    # The sigma value must be below this value (FIX THIS)
+    # The sigma value must be below this value (MAKE THIS DYNAMIC)
     sigma = 0.005 
     
     return sigma
