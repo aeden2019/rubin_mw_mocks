@@ -37,7 +37,7 @@ def getSigmaVisit():
 
 
 
-def getSigmaRand(colorband, mag, X=1.2, tvis=30):    
+def getSigmaRand(colorband, mag, X=1.2, tvis=30.0):    
     """
     Returns the random photometric error.
     
@@ -60,26 +60,96 @@ def getSigmaRand(colorband, mag, X=1.2, tvis=30):
     
     """
     
-    # Get the parameter dictionary
+    # Get the parameter dictionary and extract necessary parameters
     params = getEqnParameters(colorband)
-    
-    # Extract necessary parameters from the dictionary
-    msky = params.get('msky')
-    theta_eff = params.get('theta_eff')
     l = params.get('lambda')
-    km = params.get('km')
     Cm = params.get('Cm')
     
-    # Calculate the 5 sigma depth for point sources, eq. 6
-    m_5 = Cm + 0.50*(msky - 21) + 2.5 * np.log(0.7 / theta_eff) + 1.25*np.log(tvis / 30) - km*(X - 1)
+    # Apply correction value to Cm
+    Cm = Cm + getCmCorrection(tvis, delta_Cm)
+    
+    # Calculate the m5 parameter
+    m5 = getm5(colorband, tvis, X, Cm)
     
     # Calculate the x parameter
-    x = 10**(0.4*(mag-m_5))
+    x = 10**(0.4*(mag-m5))
     
     # Calculate the random photmetric error for point sources, eq. 5
     sigma = np.sqrt((0.04 - l)*x + l*(x**2))
     
     return sigma
+
+
+
+
+def getm5(colorband, tvis, X, Cm):
+    """
+    Returns the 5 sigma depth for point sources at zenith (eq. 6).
+    
+    Parameters:
+    -----------
+    colorband : string
+        Indicates the color band to use among 'ugrizy'.
+    tvis : float
+        Exposure time in seconds. 
+    X : float
+        Airmass. 
+    Cm : float
+        
+    
+    
+    Returns:
+    --------
+    float
+        m5 parameter.     
+    
+    """
+    
+    # Get the parameter dictionary and extract necessary parameters
+    params = getEqnParameters(colorband)
+    msky = params.get('msky')
+    theta_eff = params.get('theta_eff')
+    km = params.get('km')
+    delta_m5 = params.get('delta_m5')
+    
+    # Calculate the 5 sigma depth for point sources, eq. 6
+    m5 = Cm + 0.50*(msky - 21) + 2.5*np.log10(0.7 / theta_eff) + 1.25*np.log10(tvis / 30) - km*(X - 1)
+    
+    # Add loss of depth at airmass X = 1.2 (WHAT ABOUT OTHER AIRMASSES?)
+    if X == 1.2:
+        m5 = m5 + delta_m5
+    
+    return m5
+    
+
+
+
+def getCmCorrection(tvis, delta_Cm):
+    """
+    Returns the correction value for Cm if the exposure time is larger than the fiducial t = 30 s (eq. 7).  
+    
+    Parameters:
+    -----------
+    colorband : string
+        Indicates the color band to use among 'ugrizy'.
+    tvis : float
+        Exposure time in seconds. 
+    
+    
+    Returns:
+    --------
+    float
+        Correction value for Cm parameter. 
+    
+    """
+    
+    # Calculate exposure time difference
+    tau = tvis / 30
+    
+    # Calculate correction factor
+    delta = delta_Cm - 1.25*np.log10(1 + (((10**(0.8*delta_Cm)) - 1) / tau))
+    
+    return delta
 
 
 
@@ -106,6 +176,7 @@ def getSigmaSys():
     
     
 
+    
 def getEqnParameters(colorband):
     """
     Returns the parameters in table 2 of Ivezic 2019.
@@ -126,7 +197,7 @@ def getEqnParameters(colorband):
         'Cm':          band-dependent parameter from eq. 6
         'm5':          typical 5 sigma depth for point sources at zenith
         'delta_Cm':    loss of depth due to instrumental noise
-        'delta_CM_2':  additive correction to Cm when exposure time is double to 60s
+        'delta_Cm_2':  additive correction to Cm when exposure time is doubled to 60s
         'delta_m5':    loss depth at airmass of X = 1.2
         
     """
@@ -147,7 +218,7 @@ def getEqnParameters(colorband):
             'Cm': 23.09,
             'm5': 23.78,
             'delta_Cm': 0.62,
-            'delta_CM_2': 0.23,
+            'delta_Cm_2': 0.23,
             'delta_m5': 0.21
         },        
         'g': {
@@ -159,7 +230,7 @@ def getEqnParameters(colorband):
             'Cm': 24.42,
             'm5': 24.81,
             'delta_Cm': 0.18,
-            'delta_CM_2': 0.08,
+            'delta_Cm_2': 0.08,
             'delta_m5': 0.16
         },
         'r': {
@@ -171,7 +242,7 @@ def getEqnParameters(colorband):
             'Cm': 24.44,
             'm5': 24.35,
             'delta_Cm': 0.10,
-            'delta_CM_2': 0.05,
+            'delta_Cm_2': 0.05,
             'delta_m5': 0.14
         },
         'i': {
@@ -183,7 +254,7 @@ def getEqnParameters(colorband):
             'Cm': 24.32,
             'm5': 23.92,
             'delta_Cm': 0.07,
-            'delta_CM_2': 0.03,
+            'delta_Cm_2': 0.03,
             'delta_m5': 0.13
         },
         'z': {
@@ -195,7 +266,7 @@ def getEqnParameters(colorband):
             'Cm': 24.16,
             'm5': 23.34,
             'delta_Cm': 0.05,
-            'delta_CM_2': 0.02,
+            'delta_Cm_2': 0.02,
             'delta_m5': 0.13
         },        
         'y': {
@@ -207,7 +278,7 @@ def getEqnParameters(colorband):
             'Cm': 23.73,
             'm5': 22.45,
             'delta_Cm': 0.04,
-            'delta_CM_2': 0.02,
+            'delta_Cm_2': 0.02,
             'delta_m5': 0.14
         }
     }
