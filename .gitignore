@@ -4,3 +4,7 @@ __pycache__/
 *.ebf
 \n# Ignore notebook checkpoints
 .ipynb_checkpoints/
+\n# Ignore testing directory
+src/testing/
+\n# Ignore packages directory
+packages/
