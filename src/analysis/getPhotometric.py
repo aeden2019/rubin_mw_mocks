@@ -6,11 +6,12 @@ The equations can be found in section 3.2 of Ivezic 2019, https://arxiv.org/pdf/
 """
 
 import numpy as np
+import warnings
 
 
 
 
-def getSigmaVisit():
+def getSigmaVisit(colorband, mag, tvis=30.0, X=1.2):
     """
     Returns the error of a single visit.
     
@@ -20,6 +21,10 @@ def getSigmaVisit():
         Indicates the color band to use among 'ugrizy'.
     mag : float
         Magnitude. 
+    tvis : float
+        Exposure time in seconds. 
+    X : float
+        Airmass. 
     
     
     Returns:
@@ -30,14 +35,19 @@ def getSigmaVisit():
     
     # Get the systematic and random errors
     sigma_sys = getSigmaSys()
-    sigma_rand = getSigmaRand(colorband, mag)
+    sigma_rand = getSigmaRand(colorband, mag, tvis, X)
+    
+    # Print a warning for non-default airmass
+    if not X == 1.2:
+        warnings.warn("Airmass not equal to default (X=1.2) therefore loss of depth correction values are missing.") 
+    
     
     return np.sqrt(sigma_sys**2 + sigma_rand**2)
 
 
 
 
-def getSigmaRand(colorband, mag, X=1.2, tvis=30.0):    
+def getSigmaRand(colorband, mag, tvis=30.0, X=1.2):    
     """
     Returns the random photometric error.
     
@@ -64,6 +74,7 @@ def getSigmaRand(colorband, mag, X=1.2, tvis=30.0):
     params = getEqnParameters(colorband)
     l = params.get('lambda')
     Cm = params.get('Cm')
+    delta_Cm = params.get('delta_Cm')
     
     # Apply correction value to Cm
     Cm = Cm + getCmCorrection(tvis, delta_Cm)
@@ -115,7 +126,7 @@ def getm5(colorband, tvis, X, Cm):
     # Calculate the 5 sigma depth for point sources, eq. 6
     m5 = Cm + 0.50*(msky - 21) + 2.5*np.log10(0.7 / theta_eff) + 1.25*np.log10(tvis / 30) - km*(X - 1)
     
-    # Add loss of depth at airmass X = 1.2 (WHAT ABOUT OTHER AIRMASSES?)
+    # Add loss of depth at airmass X = 1.2 
     if X == 1.2:
         m5 = m5 + delta_m5
     
@@ -130,10 +141,10 @@ def getCmCorrection(tvis, delta_Cm):
     
     Parameters:
     -----------
-    colorband : string
-        Indicates the color band to use among 'ugrizy'.
     tvis : float
         Exposure time in seconds. 
+    delta_Cm : float
+        Loss of depth due to instrumental noise.
     
     
     Returns:
