@@ -4,7 +4,6 @@ Create ANANKE mock catalog from FIRE data.
 """
 
 import numpy as np
-import args
 import gizmo_analysis as ga
 import allvariables
 from astropy import units as u

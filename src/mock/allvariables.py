@@ -38,10 +38,10 @@ def getparams():
     parser.add_argument(
             "--param", dest="paramFile", default="config.yaml",
             type=str, help="provide parameter file")
-    args = parser.parse_args()
+    arguments = parser.parse_args()
     
     # Pass the parameter file to readparams
-    paramfile = args.paramFile
+    paramfile = arguments.paramFile
     params = readparams(paramfile)
     
     return params
