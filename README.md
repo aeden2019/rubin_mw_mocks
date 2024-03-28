@@ -35,7 +35,13 @@ To obtain a mollweide plot visualzation, which will be stored in `ananke_mollwei
 python src/visualization/generate_plot_from_catalog.py
 ```
 
-Additionally, key parameters can be modified in `src/mock/config.yaml`.
+Additionally, key parameters can be modified in `src/mock/config.yaml`. 
+
+You can also select a different yaml file when you the python script in the command line:
+
+```Bash
+python src/mock/make_mock.py --param foo.yaml
+```
 
 ---
 
