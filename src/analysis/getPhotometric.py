@@ -70,17 +70,14 @@ def getSigmaRand(colorband, mag, tvis=30.0, X=1.2):
     
     """
     
-    # Get the parameter dictionary and extract necessary parameters
-    params = getEqnParameters(colorband)
-    l = params.get('lambda')
-    Cm = params.get('Cm')
-    delta_Cm = params.get('delta_Cm')
+    # Get the lambda parameter
+    l = getEqnParameters(colorband).get('lambda')
     
-    # Apply correction value to Cm
-    Cm = Cm + getCmCorrection(tvis, delta_Cm)
+    # Get the Cm parameter
+    Cm = getCm(colorband)
     
     # Calculate the m5 parameter
-    m5 = getm5(colorband, tvis, X, Cm)
+    m5 = getm5(colorband, Cm, tvis, X)
     
     # Calculate the x parameter
     x = 10**(0.4*(mag-m5))
@@ -93,7 +90,7 @@ def getSigmaRand(colorband, mag, tvis=30.0, X=1.2):
 
 
 
-def getm5(colorband, tvis, X, Cm):
+def getm5(colorband, Cm, tvis=30.0, X=1.2):
     """
     Returns the 5 sigma depth for point sources at zenith (eq. 6).
     
@@ -106,6 +103,8 @@ def getm5(colorband, tvis, X, Cm):
     X : float
         Airmass. 
     Cm : float
+        Band-dependent parameter. 
+        
         
     
     
@@ -131,20 +130,52 @@ def getm5(colorband, tvis, X, Cm):
         m5 = m5 + delta_m5
     
     return m5
-    
 
 
 
-def getCmCorrection(tvis, delta_Cm):
+
+def getCm(colorband, tvis=30.0):
     """
-    Returns the correction value for Cm if the exposure time is larger than the fiducial t = 30 s (eq. 7).  
+    Returns the band-dependent parameter Cm.  
     
     Parameters:
     -----------
+    colorband : string
+        Indicates the color band to use among 'ugrizy'.
     tvis : float
         Exposure time in seconds. 
+    
+    
+    Returns:
+    --------
+    float
+        Cm value.
+    
+    """
+    
+    # Extract parameters 
+    Cm = getEqnParameters(colorband).get('Cm')
+    delta_Cm = getEqnParameters(colorband).get('delta_Cm')
+    
+    # Apply correction value to Cm
+    Cm = Cm + getCmCorrection(delta_Cm, tvis)
+    
+    return Cm
+    
+
+
+
+def getCmCorrection(delta_Cm, tvis = 30.0):
+    """
+    Returns the correction value for Cm. 
+    Will return 0 if the exposure time is equal to the fiducial t = 30 s (eq. 7).  
+    
+    Parameters:
+    -----------
     delta_Cm : float
         Loss of depth due to instrumental noise.
+    tvis : float
+        Exposure time in seconds. 
     
     
     Returns:
@@ -180,7 +211,8 @@ def getSigmaSys():
         
     """
     
-    # The sigma value must be below this value (MAKE THIS DYNAMIC)
+    # The sigma value must be below this value
+    # Note: this is currently using the worst-case value, in the future make this value dynamic
     sigma = 0.005 
     
     return sigma

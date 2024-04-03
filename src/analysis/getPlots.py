@@ -10,11 +10,18 @@ from matplotlib import pyplot as plt
 
 def colormagplot(xaxis, yaxis):
     """
-    Create color magnitude diagram
+    Create color magnitude diagram.
     
-    input:
-    xaxis = array with g-r data
-    yaxis = array with M_g data
+    Parameters:
+    -----------
+    xaxis : np.array
+        Array with g-r data.
+    yaxis : np.array
+        Array with M_g data.
+    
+    
+    Returns:
+    --------
     
     """
     
@@ -40,3 +47,6 @@ def colormagplot(xaxis, yaxis):
 
     plt.tight_layout()
     plt.show()
+    
+    
+    
