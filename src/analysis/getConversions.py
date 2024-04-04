@@ -8,6 +8,7 @@ import numpy as np
 
 
 
+
 def abs2app(M, d, A=0.0):
     """
     Converts absolute magnitude to apparent magnitude.
@@ -34,6 +35,7 @@ def abs2app(M, d, A=0.0):
 
 
 
+
 def app2abs(m, d, A=0.0):
     """
     Converts apparent magnitude to absolute magnitude.
@@ -57,5 +59,6 @@ def app2abs(m, d, A=0.0):
     M = m - 5 * np.log10(d) + 5 - A*d
     
     return M
+
 
 
