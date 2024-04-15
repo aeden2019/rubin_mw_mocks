@@ -121,6 +121,38 @@ def interpolate_density(x, y):
 
 
 
+def interpolate_velocity(x, y):
+    """
+    Interpolates velocity values using linear interpolation.
+
+    Parameters:
+    -----------
+    x : numpy.ndarray
+        Array of x-values.
+    y : numpy.ndarray
+        Array of y-values.
+
+    Returns:
+    --------
+    numpy.ndarray, numpy.ndarray
+        Interpolated x-values and interpolated y-values.
+    """
+    # Remove zero and non-finite values before interpolation
+    valid_indices = np.logical_and(y != 0, np.isfinite(y))
+    x_valid = x[valid_indices]
+    y_valid = y[valid_indices]
+    
+    # Perform linear interpolation
+    linear_interp = interp1d(x_valid, y_valid, kind='linear', fill_value="extrapolate")
+    
+    # Interpolate values for all x
+    y_interp = linear_interp(x)
+    
+    return x, y_interp
+
+
+
+
 def normalize_data(data_interp):
     """
     Normalize the interpolated data by the value at the first index.
