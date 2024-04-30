@@ -174,3 +174,39 @@ def normalize_data(data_interp):
 
 
 
+
+def removeSatellite(part, sat_id_dir):
+    """
+    Returns a mask that removes all the FIRE particles from 
+    the 'part' object using the file stored in 'sat_id_dir' directory.
+
+    Parameters:
+    -----------
+    part : numpy.ndarray
+        Array of radial values.
+    sat_id_dir : string
+        Gizmo ParticleDictionaryClass.
+
+    Returns:
+    --------
+    numpy.ndarray
+        satellite_mask : mask to remove satellite
+    """
+
+    # array of positions in principal axes (in kpc)
+    pos_pa = part['star'].prop('host.distance.principal')
+
+    # Blank satellite mask
+    satellite_mask = np.ones(len(pos_pa), dtype=bool)
+
+    # Store satellite indices (from Mia)
+    all_unique_lmc_inds = np.loadtxt(sat_id_dir)
+    all_inds = part['star'].prop('id')
+    remaining_indices = np.setdiff1d(all_inds, np.array(all_unique_lmc_inds))
+    id_indices = np.where(np.isin(all_inds, remaining_indices))[0]
+    only_lmc_indices = np.where(~np.isin(all_inds, remaining_indices))[0]
+
+    # Remove satellite
+    satellite_mask[only_lmc_indices] = False
+    
+    return satellite_mask
