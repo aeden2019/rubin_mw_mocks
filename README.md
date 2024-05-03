@@ -17,6 +17,7 @@ E-Mail: aeden2019@my.fit.edu
     * [Input Parameters](#ananke-parameters-input) 
     * [Output Parameters](#ananke-parameters-output)
 * [Configuraton Files](#configuration-files)
+* [Future Work](#future-work)
 
 ---
 
@@ -180,3 +181,19 @@ Simulation m12b:
 
 Simulation m12i:
 * m12i_inner_600: current-day snapshot 
+
+---
+
+## Future Work <a name="future-work"></a>
+
+Below is a list of the work that remains to be done:
+* Fit the power law to the plots in `population_plots.ipynb`
+* In `population_plots.ipynb` add region quadrant density plots for populations (BHB, MSTO, Kgiant)
+* Update the README to describe each notebook in depth
+* Add additional errors to our ananke output such as distance and proper motion errors (currently we only have the photometric errors)
+* Rotate the outputed data so that the m12b satellite lines up with the LMC in the Milky Way
+* Manually remove satellite objects using Rockstar data
+* Create all-sky plots in each photometric band 
+* Clean up the plots using matplotlib configuration and colormaps
+* Plot metalicity distribution of the stars from FIRE
+* Add extinction values using automated script 
