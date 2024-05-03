@@ -16,6 +16,7 @@ E-Mail: aeden2019@my.fit.edu
 * [Ananke Parameters](#ananke-parameters)
     * [Input Parameters](#ananke-parameters-input) 
     * [Output Parameters](#ananke-parameters-output)
+* [Configuraton Files](#configuration-files)
 
 ---
 
@@ -35,13 +36,16 @@ To obtain a mollweide plot visualzation, which will be stored in `ananke_mollwei
 python src/visualization/generate_plot_from_catalog.py
 ```
 
-Additionally, key parameters can be modified in `src/mock/config.yaml`. 
+Key parameters can be modified in `src/mock/config.yaml`. 
 
 You can also select a different yaml file when you the python script in the command line:
 
 ```Bash
 python src/mock/make_mock.py --param foo.yaml
 ```
+
+Additional pre-made configuration files used in notebooks can be found in `src/mock/`, such as `m12b_600_inner.yaml`. For more information about these files, refer to the Configuration Files section of the README. 
+
 
 ---
 
@@ -163,3 +167,16 @@ Below is a table of the parameters outputed by `py-ananke`.
 | vz              | Velocity z                    | km/s          |
 
 ---
+
+## Configuraton Files <a name="configuration-files"></a>
+
+The configuration files below are used in `population_plots.ipynb` and are all configured for LSST. They are labeled inner since they contain data from a radius of 5 kpc to a radius of 300 kpc, and require that the disk be removed in code. 
+
+Simulation m12b:
+* m12b_inner_356: snapshot taken before pericenter
+* m12b_inner_385: snapshot at pericenter
+* m12b_inner_396: snapshot taken after pericenter
+* m12b_inner_600: current-day snapshot 
+
+Simulation m12i:
+* m12i_inner_600: current-day snapshot 

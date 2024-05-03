@@ -1,0 +1,23 @@
+---
+# FIRE snapshot number and simulation id (user specific)
+snap : 396
+sim : 'm12b'
+# Simulation directory and satellite ids location (user specific)
+sim_dir : '/home/jovyan/data/fire2/m12b_res7100/'
+sat_id_dir : '/home/jovyan/home/tracked/m12b/all_LMC_inds.txt'
+# Min and max radius [kpc]
+rmin : 5
+rmax : 300
+# If True, removes the satellite using satellite ids
+sat_mask : True
+# Ananke parameters
+ananke_name : 'm12b_inner_396'
+photo_sys : 'padova/LSST'
+cmd_magnames: 'rmag,gmag-rmag'
+app_mag_lim_lo: 17.0
+app_mag_lim_hi: 27.5
+abs_mag_lim_lo: -7.0
+abs_mag_lim_hi: 10.0
+ananke_r_max: 1000
+fsample: 0.0005
+...
